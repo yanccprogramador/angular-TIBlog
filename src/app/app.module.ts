@@ -17,7 +17,7 @@ import { ArticlesComponent } from './articles/articles.component';
     BrowserModule,
     HttpModule
   ],
-  providers: [ArticleService, UserService, AuthGuard, AuthenticationService,Http],
+  providers: [ArticleService, UserService, AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
