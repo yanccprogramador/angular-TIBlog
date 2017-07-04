@@ -1,16 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="row" (load)="verify()" (show)="loginView">
+<!--div class="row" (load)="verify()">
   <div class="col s12 m10 l6">
     <input type="text" ngModel="login">
     <input type="password" ngModel="password">
     <input type="button" value="Logue" (click)="logar()">
   </div>
-</div>
-<div class="row" (show)="articlesView">
-<div class="col s12 m10 l6">
-    <table class="responsive-table">
-        <thead><tr><td>Titulo Arquivo</td></tr></thead>
-        <tbody><tr *ngFor="let article of articles"><td><{{article.titulo}}/td></tr> </tbody>
-    </table>
-</div>
-</div>
+</div-->
+<app-articles>
+</app-articles>

@@ -5,15 +5,19 @@ import {AuthGuard} from "./auth/auth.guard";
 import {ArticleService} from "./services/articles.service";
 import {UserService} from "./services/user.service";
 import { AppComponent } from './app.component';
+import{Http,HttpModule} from '@angular/http';
+import { ArticlesComponent } from './articles/articles.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArticlesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
-  providers: [ArticleService, UserService, AuthGuard, AuthenticationService],
+  providers: [ArticleService, UserService, AuthGuard, AuthenticationService,Http],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
