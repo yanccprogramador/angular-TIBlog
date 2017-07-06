@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
 import {sha1} from "js-sha1";
 
 
@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     return this.http.get('http://yc-ti-blog.herokuapp.com/usuario/'+username)
-      .map((response: Response) => {
+      .toPromise().then((response: Response) => {
         let body=response.json();
         if(body.rows.senha==sha1(password)){
            localStorage.setItem('currentUser', JSON.stringify(body.rows));
