@@ -1,10 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<!--div class="row" (load)="verify()">
+<div class="row" (load)="verify()" *ngIf="!loginView">
   <div class="col s12 m10 l6">
     <input type="text" ngModel="login">
     <input type="password" ngModel="password">
     <input type="button" value="Logue" (click)="logar()">
   </div>
-</div-->
+</div>
 <app-articles>
 </app-articles>

@@ -2,7 +2,18 @@
 <div class="col s12 m10 l6">
     <table class="responsive-table">
         <thead><tr><td>Titulo Artigos</td></tr></thead>
-        <tbody><tr *ngFor="let article of articles"><td><{{article.titulo}}/td></tr> </tbody>
+        <tbody><tr *ngFor="let article of articles"><td >{{article.titulo}}</td><td><button type="button" data-target="modal1" class="btn waves-effect waves-green" (click)="abrir(article.id)">Visualizar</button></td></tr> </tbody>
     </table>
 </div>
 </div>
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <!--Titulo:{{articleUnique.titulo}}<br/>
+      Dono:{{articleUnique.dono}}  <br/>
+      Artigo:{{articleUnique.artigo}}-->
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>

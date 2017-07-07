@@ -3,6 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class UserService {
@@ -16,23 +17,23 @@ export class UserService {
   }
   constructor(private http:Http){}
   getAll():any{
-    return this.http.get(this.usersUrl).map((response: Response) => response.json());
+    return this.http.get(this.usersUrl).toPromise().then((response: Response) =>{return response.json();});
   }
 
   getById(id: string):any {
-    return this.http.get(this.usersUrl + id).map((response: Response) => response.json());
+    return this.http.get(this.usersUrl + id).toPromise().then((response: Response) =>{return response.json();});
   }
 
   create(user: JSON):any {
-    return this.http.post(this.usersUrl, user).map((response: Response) => response.json());
+    return this.http.post(this.usersUrl, user).toPromise().then((response: Response) =>{return response.json();});
   }
 
   update(user: JSON,login: string):any {
-    return this.http.put(this.usersUrl + login, user).map((response: Response) => response.json());
+    return this.http.put(this.usersUrl + login, user).toPromise().then((response: Response) =>{return response.json();});
   }
 
   delete(id: string):any {
-    return this.http.delete(this.usersUrl + id).map((response: Response) => response.json());
+    return this.http.delete(this.usersUrl + id).toPromise().then((response: Response) => {return response.json();});
   }
 
   // private helper methods

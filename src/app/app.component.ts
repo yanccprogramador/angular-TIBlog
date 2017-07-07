@@ -15,17 +15,17 @@ export class AppComponent {
   articles:any;
   constructor(private auth:AuthGuard,private authe:AuthenticationService ){}
    verify():any{
-  /*   this.loginView=this.auth.canActivate();
+    this.loginView=this.auth.canActivate();
      if ( this.loginView == true) {
        this.articlesView = true;
      }
-     */
+
    }
    logar():any{
 
 
-    //  window.alert(this.authe.login(this.login,this.password));
-      //this.authe.login(this.login,this.password)
+      window.alert(this.authe.login(this.login,this.password));
+      this.authe.login(this.login,this.password)
       this.articlesView=true;
    }
 
