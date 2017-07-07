@@ -8,15 +8,20 @@ import { AppComponent } from './app.component';
 import { FormsModule }  from '@angular/forms'
 import{Http,HttpModule} from '@angular/http';
 import { ArticlesComponent } from './articles/articles.component';
+import { PublishComponent } from './publish/publish.component';
+import { MyArticlesComponent } from './my-articles/my-articles.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArticlesComponent,
+    PublishComponent,
+    MyArticlesComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-	FormsModule
+	  FormsModule
   ],
   providers: [ArticleService, UserService, AuthGuard, AuthenticationService],
   bootstrap: [AppComponent]
