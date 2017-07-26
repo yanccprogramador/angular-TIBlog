@@ -1,5 +1,5 @@
  export class Article{
-        titulo:string;
+        title:string;
         dono:string;
         artigo:string;
 }

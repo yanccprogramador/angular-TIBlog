@@ -24,16 +24,22 @@ export class ArticleService {
   getAll() {
     return this.http.get(this._url).toPromise().then(response=> {return this.takeRows(response.json());});
   }
-
+  getMine(dono:string):any {
+    return this.http.get(this._url + 'meu/'+dono).toPromise().then(response => {return this.takeRows(response.json());});
+  }
   getById(id: number):any {
     return this.http.get(this._url + id).toPromise().then(response => {return this.takeRows(response.json());});
   }
 
-  create(article: JSON):any {
-    return this.http.post(this._url, article).toPromise().then((response) => {return response.json();});
+  create(article: Article):any {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this._url, article,options).toPromise().then((response) => {console.log(response.json());return response.json();});
   }
 
   update(article : JSON,id : number) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+let options = new RequestOptions({ headers: headers });
     return this.http.put(this._url+id, article).toPromise().then((response) => {return response.json();});
   }
 
@@ -43,7 +49,7 @@ export class ArticleService {
 
   // private helper methods
   private takeRows(body){
-    let article= body.rows;
+    let article=body.rows;
     /*article.titulo=body.rows.titulo;
     article.dono=body.rows.dono;
     article.artigo=body.rows.artigo;*/

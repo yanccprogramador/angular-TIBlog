@@ -21,14 +21,14 @@ export class UserService {
   }
 
   getById(id: string):any {
-    return this.http.get(this.usersUrl + id).toPromise().then((response: Response) =>{return response.json();});
+    return this.http.get(this.usersUrl + id).toPromise().then((response: Response) =>{console.log(response.json());return response.json();});
   }
 
-  create(user: JSON):any {
+  create(user):any {
     return this.http.post(this.usersUrl, user).toPromise().then((response: Response) =>{return response.json();});
   }
 
-  update(user: JSON,login: string):any {
+  update(user,login: string):any {
     return this.http.put(this.usersUrl + login, user).toPromise().then((response: Response) =>{return response.json();});
   }
 
