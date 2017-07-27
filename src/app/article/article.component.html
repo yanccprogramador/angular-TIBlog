@@ -7,8 +7,7 @@
     <input type="text" id='login' [(ngModel)]="login">
     <label for='pass' >Senha:</label>
     <input type="password" id='pass' [(ngModel)]="password">
-    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()">
-    <br/>
+    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
     <a routerLink="/register">Registre</a>
   </div>
 </div>
@@ -26,12 +25,14 @@
 </nav>
 <div class="row">
 <div class="container">
-  <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-<div class="col s12 m10 l6" *ngIf="logado">
- <br/>
-    <button class="btn waves-effect waves-red red" (click)="deslogar()">Logout</button>
-    <button class="btn waves-effect waves-red red" (click)="up()">Atualizar informações</button>
-    <button class="btn waves-effect waves-red red" (click)="ap()">Apagar Conta</button>
+    <div class="col s12 m1 l2 offset -l2"><br/><br/></div>
+    <div class="col s12 m10 l8" *ngIf="logado">
+        <h1 >{{article[0].titulo }}</h1><br/>
+        by:{{article[0].dono }}
+         <br/>
+         Artigo:<br/>
+        <label [innerHTML]=" article[0].artigo" ></label>
+
 </div>
 </div>
 </div>

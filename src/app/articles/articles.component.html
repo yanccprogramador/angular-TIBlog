@@ -7,7 +7,7 @@
     <input type="text" id='login' [(ngModel)]="login">
     <label for='pass' >Senha:</label>
     <input type="password" id='pass' [(ngModel)]="password">
-    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()">
+    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
     <a routerLink="/register">Registre</a>
   </div>
 </div>
@@ -27,9 +27,9 @@
 <div class="container">
     <div class="col s12 m1 l2 offset -l2"><br/><br/></div>
 <div class="col s12 m10 l8" *ngIf="logado">
-    <table class="responsive-table">
-        <thead><tr><td>Titulo Artigos</td></tr></thead>
-        <tbody><tr *ngFor="let article of articles"><td (click)="modal1.open()" ><h5><b>{{article.titulo }}</b></h5><br/>"{{ article.artigo.substring(0,100)}}"</td>
+    <table class="responsive-table highlight">
+        <thead><tr><td>Artigos</td></tr></thead>
+        <tbody><tr *ngFor="let article of articles"><td [routerLink]="['',article.id]" ><h5><b>{{article.titulo }}</b></h5><br/><label [innerHTML]=" article.artigo.substring(0,100)"></label></td>
 
         </tr>
       </tbody>
@@ -37,17 +37,3 @@
 </div>
 </div>
 </div>
-<!-- Modal Structure -->
-
-  <mz-modal #modal1 >
-  <mz-modal-header>
-    {{articles.titulo}}
-  </mz-modal-header>
-  <mz-modal-content>
-    <!--Dono:{{articles.dono}}  <br/>
-    Artigo:{{article.artigo}}-->
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button  class="btn waves-effect waves-green" mz-modal-close>ok</button>
-  </mz-modal-footer>
-</mz-modal>

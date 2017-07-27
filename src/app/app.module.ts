@@ -14,10 +14,12 @@ import { MyArticlesComponent } from './my-articles/my-articles.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterializeModule } from 'ng2-materialize';
+import { ArticleComponent } from './article/article.component';
 
 
 const routes:Routes = [
   {path:'', component:ArticlesComponent },
+  {path:':id', component:ArticleComponent },
   {path:'publish', component:PublishComponent},
   {path:'my', component:MyArticlesComponent},
   {path:'user', component:LogoutComponent},
@@ -30,7 +32,8 @@ const routes:Routes = [
     PublishComponent,
     MyArticlesComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

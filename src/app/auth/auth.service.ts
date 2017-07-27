@@ -25,7 +25,7 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         return true;
       }).catch((response: Response)=>
-       this.toastService.show('Tente novamente usuario invalido!', 4000, 'green')
+       this.toastService.show('Tente novamente usuario invalido!', 4000, 'red')
      );
   }
 
