@@ -1,46 +1,75 @@
 <div class="row" *ngIf="!logado">
   <div class="container">
-  <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-  <div class="col s12 m10 l6">
-    <img class="responsive-image" style="width: 430px; height: 200px;"  src="assets/logo.png"/>
-    <label for='login' >Login:</label>
-    <input type="text" id='login' [(ngModel)]="login">
-    <label for='pass' >Senha:</label>
-    <input type="password" id='pass' [(ngModel)]="password">
-    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()">
+    <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
+    <div class="col s12 m10 l6">
+      <img class="responsive-image" style="width: 430px; height: 200px;" src="assets/logo.png" />
+
+
+      <input type="text" id='login' [(ngModel)]="login">
+      <label for='login'>Login</label>
+      <input type="password" id='pass' [(ngModel)]="password">
+      <label for='pass'>Senha</label>
+      <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+      <a routerLink="/register">Registre</a>
+    </div>
   </div>
-</div>
 </div>
 <nav *ngIf="logado">
   <div class="nav-wrapper green">
     <a href="#" class="brand-logo"><img src="assets/logo.png" style="width: 60px; height: 60px;"></a>
+    <a href="#"  class="button-collapse hide-on-large-only green"  [id]="'btn-sidenav-demo'"><i mz-icon-mdi
+[icon]="'format-align-justify'" class="black-text"
+[size]="'36px'">
+</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/">Meus artigos</a></li>
+      <li><a routerLink="/">Todos Artigos</a></li>
       <li><a routerLink="/publish">Publique</a></li>
       <li><a routerLink="/my">Meus Artigos</a></li>
       <li><a routerLink="/user">User</a></li>
     </ul>
+
+  <mz-sidenav [id]="'sidenav-demo'"
+  [collapseButtonId]="'btn-sidenav-demo'" >
+
+      <mz-sidenav-link><a routerLink="/">Todos Artigos</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/publish">Publique</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/my">Meus Artigos</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/user">User</a></mz-sidenav-link>
+</mz-sidenav>
   </div>
 </nav>
 <div class="row">
 <div class="container">
 <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-<div class="col s12 m10 l6" *ngIf="logado">
+<div  class="col s12 m10 l6" *ngIf="logado">
     <table class="responsive-table">
         <thead><tr><td>Titulo Artigos</td></tr></thead>
-        <tbody><tr *ngFor="let article of articles"><td >{{article.titulo}}</td><td><button type="button" class="btn waves-effect waves-green" (click)="atualizar(article.id)">Atualizar</button></td><td><button type="button" class="btn waves-effect waves-green" (click)="del(article.id)">Apagar</button></td></tr> </tbody>
+        <tbody><tr *ngFor="let article of articles"><td (show)="teste()">{{article.titulo}}</td><td><button type="button" class="btn waves-effect waves-green" mz-button (mouseover)="atualizar(article.id)" (click)="editModal.open()">Atualizar</button></td><td><button type="button" class="btn waves-effect waves-green" (click)="del(article.id)">Apagar</button></td></tr> </tbody>
     </table>
 </div>
 </div>
 </div>
-<!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <!--Titulo:{{articleUnique.titulo}}<br/>
-      Dono:{{articleUnique.dono}}  <br/>
-      Artigo:{{articleUnique.artigo}}-->
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+<mz-modal #editModal [fixedFooter]="true"  >
+  <mz-modal-header>
+
+    Atualizar
+  </mz-modal-header>
+  <mz-modal-content>
+<form #formModal="ngForm">
+
+      <input type="text"  name="title" id="title" #titulo="ngModel" [(ngModel)]="artigo.titulo" class="validate" required/>
+      <label for="title" [ngClass]="{'red-text': !titulo.valid && titulo.touched}">Titulo</label>
+      <div *ngIf="!titulo.valid && titulo.touched"[ngClass]="{'red-text': !titulo.valid && titulo.touched}">Por favor, digite o título!</div>
+      <input type="text" name="dono" [(ngModel)]="artigo.dono" disabled="true" />
+      <label for="dono">Dono</label>
+      <input type="text" #art="ngModel" name="artigo" [(ngModel)]="artigo.artigo" class="input-field validate" required/>
+      <label for="artigo"  [ngClass]="{'red-text': !art.valid && art.touched}">Artigo</label>
+      <div *ngIf="!art.valid && art.touched"  [ngClass]="{'red-text': !art.valid && art.touched}">Por favor, digite o artigo!</div>
+    <
+  </form>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" [disabled]="!formModal.valid"  (click)="update(artigo.id)" mz-modal-close>Atualizar</button>
+  </mz-modal-footer>
+
+</mz-modal>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../services/user.service";
 import * as sha1 from 'js-sha1';
-import{MzToastService} from "ng2-materialize/dist"
+import{MzToastService} from "ng2-materialize/dist";
 import{Router} from "@angular/router";
 @Component({
   selector: 'app-register',
@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   private login;
+  private existe:boolean=false;
   private senha;
   private nome;
   registrar():any{
@@ -22,6 +23,15 @@ export class RegisterComponent implements OnInit {
       if(res.success){
         this.toastService.show('Criado!', 4000, 'green');
         this.router.navigate(['/'], { });
+      }
+    });
+  }
+  verifica(){
+    this.userService.getById(this.login).then((art)=>{
+      if(art.linhas==0){
+        this.existe=false;
+      }else{
+        this.existe=true;
       }
     });
   }

@@ -30,14 +30,16 @@ export class ArticleService {
   getById(id: number):any {
     return this.http.get(this._url + id).toPromise().then(response => {return this.takeRows(response.json());});
   }
-
+  search(key){
+    return this.http.get(this._url +"search/" +key).toPromise().then(response => {return this.takeRows(response.json());});
+  }
   create(article: Article):any {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this._url, article,options).toPromise().then((response) => {console.log(response.json());return response.json();});
   }
 
-  update(article : JSON,id : number) {
+  update(article : any,id : number) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
 let options = new RequestOptions({ headers: headers });
     return this.http.put(this._url+id, article).toPromise().then((response) => {return response.json();});

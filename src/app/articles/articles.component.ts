@@ -8,27 +8,39 @@ import {ArticleService} from "app/services/articles.service";
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css']
 })
-export class ArticlesComponent implements OnInit{
+export class ArticlesComponent implements OnInit {
   articles;
   articleUnique;
-  logado: boolean=true;
-  private login:string;
-  private password:string;
-  constructor(private articleService: ArticleService,private auth:AuthGuard,private authe:AuthenticationService) { }
-  ngOnInit(){
-
-    this.logado=this.auth.canActivate();
-     if ( this.logado == true) {
-       this.articleService.getAll().then((art)=>this.articles=art);
-     }
-
+  mostrar=false;
+  logado: boolean = true;
+  private login: string;
+  private password: string;
+  pesquisa="";
+  constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService) { }
+  ngOnInit() {
+    this.auth.canActivate().then((sessao) => {
+      this.logado = sessao;
+      if (this.logado == true) {
+        this.articleService.getAll().then((art) => this.articles = art);
+      }
+    });
+  }
+  mostrando(){
+    this.mostrar=!this.mostrar;
+  }
+  pesquisando(){
+    if(this.pesquisa!="" ){
+        this.articleService.search(this.pesquisa).then((art) => this.articles = art);
+    }else{
+      this.articleService.getAll().then((art) => this.articles = art);
     }
-    logar():any{
-      this.authe.login(this.login,this.password).then((log:boolean)=> this.logado=log);
-    }
+  }
+  logar(): any {
+    this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
+  }
 
-  abrir(id:number){
-    this.articleService.getById(id).then((art)=>this.articleUnique=art);
+  abrir(id: number) {
+    this.articleService.getById(id).then((art) => this.articleUnique = art);
 
   }
 

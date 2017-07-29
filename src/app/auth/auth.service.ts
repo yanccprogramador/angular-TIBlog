@@ -21,9 +21,13 @@ export class AuthenticationService {
         if(user.senha==sha1(password)){
           this.toastService.show('Logado!', 4000, 'green');
            localStorage.setItem('currentUser',user.login);
+           localStorage.setItem('userSenha',user.senha);
+           return true;
+        }else{
+            this.toastService.show('Tente novamente usuario invalido!', 4000, 'red');
+            return false;
         }
         // login successful if there's a jwt token in the response
-        return true;
       }).catch((response: Response)=>
        this.toastService.show('Tente novamente usuario invalido!', 4000, 'red')
      );
@@ -32,5 +36,6 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('userSenha');
   }
 }

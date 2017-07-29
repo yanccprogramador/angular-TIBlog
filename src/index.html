@@ -1,16 +1,54 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <style>
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  </style>
   <meta charset="utf-8">
-  <title>AngularTIblog</title>
+  <title>TI blog</title>
   <base href="/">
-
-  <!-- Compiled and minified CSS -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/assets/logo.png">
 </head>
 <body>
+  <header></header>
+   <main>
   <app-root></app-root>
+</main>
+  <footer class="page-footer black">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+               <h5 class="white-text">Yan Christoffer Programações inc</h5>
+               <p class="grey-text text-lighten-4">Desenvolvido por Yan Christoffer.</p>
+             </div>
+             <div class="col l4 offset-l2 s12">
+               <h5 class="white-text">Acesse</h5>
+               <ul>
+                 <li><a class="grey-text text-lighten-3" href="https://ycprogramacoes.herokuapp.com">Nossa página</a></li>
+                 <li><a class="grey-text text-lighten-3" href="https://pt-br.facebook.com/yanccprogramador/">Nossa página no facebook</a></li>
+                 <li><a class="grey-text text-lighten-3" href="https://github.com/yanccprogramador/angular-TIblog">Projeto open source no github</a></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright green darken-4">
+           <div class="container">
+           © 2017 Copyright Text
+           <a class="grey-text text-lighten-4 right" href="https://play.google.com/store/apps/details?id=br.com.yanccprogramador.blogti"><img  src="/assets/google-play-badge.png" style="width: 150px; height: 40px;" class="responsive-image"></img></a>
+           </div>
+         </div>
+       </footer>
+
 </body>
 </html>

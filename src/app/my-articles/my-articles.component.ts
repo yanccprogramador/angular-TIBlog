@@ -3,7 +3,7 @@ import {Article} from '../articles';
 import {AuthGuard} from '../auth/auth.guard';
 import {AuthenticationService} from "../auth/auth.service";
 import {ArticleService} from "app/services/articles.service";
-
+import { MzToastService } from "ng2-materialize/dist";
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
@@ -12,27 +12,49 @@ import {ArticleService} from "app/services/articles.service";
 export class MyArticlesComponent implements OnInit {
   articles;
   articleUnique;
-  logado: boolean=true;
-  private login:string;
-  private password:string;
-  constructor(private articleService: ArticleService,private auth:AuthGuard,private authe:AuthenticationService) { }
-  ngOnInit(){
+  artigo = { titulo: "", dono: "", artigo: "", id: 0 };
+  logado: boolean = true;
+  private login: string;
+  private password: string;
+  editModal;
+  constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
 
-    this.logado=this.auth.canActivate();
-     if ( this.logado == true) {
-       let user=localStorage.getItem('currentUser');
-       this.articleService.getMine(user).then((art)=>this.articles=art);
-     }
+  ngOnInit() {
+    this.auth.canActivate().then((sessao) => {
+      this.logado = sessao;
+      if (this.logado == true) {
+        let user = localStorage.getItem('currentUser');
+        this.articleService.getMine(user).then((art) => this.articles = art);
 
-    }
-    logar():any{
-      this.authe.login(this.login,this.password);
-      this.logado=true;
-    }
+      }
+    });
+  }
+  logar(): any {
+    this.authe.login(this.login, this.password);
+    this.logado = true;
+  }
+  atualizar(id: number) {
 
-  del(id:number){
-    let user=localStorage.getItem('currentUser');
-    this.articleService.delete(id).then((art)=>this.articleService.getMine(user).then((art)=>this.articles=art));
-
+    this.articleService.getById(id).then((art) => this.artigo = art[0]);
+  }
+  update(id) {
+    this.articleService.update(this.artigo, id).then((art) => {
+      if (art.success) {
+        this.toastService.show('Atualizado!', 4000, 'green');
+      } else {
+        this.toastService.show('Tente novamente!', 4000, 'red');
+      }
+    });
+  }
+  del(id: number) {
+    let user = localStorage.getItem('currentUser');
+    this.articleService.delete(id).then((art) => {
+      if (art.success) {
+        this.articleService.getMine(user).then((art) => this.articles = art);
+        this.toastService.show('Apagado!', 4000, 'green');
+      } else {
+        this.toastService.show('Tente novamente!', 4000, 'red');
+      }
+    });
   }
 }

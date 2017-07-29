@@ -15,15 +15,17 @@ import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterializeModule } from 'ng2-materialize';
 import { ArticleComponent } from './article/article.component';
+import { MzModalService } from 'ng2-materialize';
 
 
 const routes:Routes = [
   {path:'', component:ArticlesComponent },
-  {path:':id', component:ArticleComponent },
   {path:'publish', component:PublishComponent},
   {path:'my', component:MyArticlesComponent},
   {path:'user', component:LogoutComponent},
-  {path:'register', component:RegisterComponent}
+  {path:'register', component:RegisterComponent},
+  {path:':id', component:ArticleComponent }
+
 ];
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ const routes:Routes = [
     MaterializeModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [ArticleService, UserService, AuthGuard, AuthenticationService],
+  providers: [ArticleService, UserService, AuthGuard, AuthenticationService,MzModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

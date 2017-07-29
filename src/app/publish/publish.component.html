@@ -1,40 +1,70 @@
 <div class="row" *ngIf="!logado">
   <div class="container">
-  <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-  <div class="col s12 m10 l6">
-    <img class="responsive-image" style="width: 430px; height: 200px;"  src="assets/logo.png"/>
-    <label for='login'  >Login:</label>
-    <input type="text" id='login' name='login' [(ngModel)]="login">
-    <label for='pass' >Senha:</label>
-    <input type="password" id='pass' name='pass' [(ngModel)]="password">
-    <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()">
-    <br/>
-    <a routerLink="/register">Registre</a>
+    <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
+    <div class="col s12 m10 l6">
+      <img class="responsive-image" style="width: 430px; height: 200px;" src="assets/logo.png" />
+
+
+      <input type="text" id='login' [(ngModel)]="login">
+      <label for='login'>Login</label>
+      <input type="password" id='pass' [(ngModel)]="password">
+      <label for='pass'>Senha</label>
+      <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+      <a routerLink="/register">Registre</a>
+    </div>
   </div>
-</div>
 </div>
 <nav *ngIf="logado">
   <div class="nav-wrapper green">
     <a href="#" class="brand-logo"><img src="assets/logo.png" style="width: 60px; height: 60px;"></a>
+    <a href="#"  class="button-collapse hide-on-large-only green"  [id]="'btn-sidenav-demo'"><i mz-icon-mdi
+[icon]="'format-align-justify'" class="black-text"
+[size]="'36px'">
+</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/">Meus artigos</a></li>
+      <li><a routerLink="/">Todos Artigos</a></li>
       <li><a routerLink="/publish">Publique</a></li>
       <li><a routerLink="/my">Meus Artigos</a></li>
       <li><a routerLink="/user">User</a></li>
     </ul>
+
+  <mz-sidenav [id]="'sidenav-demo'"
+  [collapseButtonId]="'btn-sidenav-demo'" >
+
+      <mz-sidenav-link><a routerLink="/">Todos Artigos</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/publish">Publique</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/my">Meus Artigos</a></mz-sidenav-link>
+      <mz-sidenav-link><a routerLink="/user">User</a></mz-sidenav-link>
+</mz-sidenav>
   </div>
 </nav>
 <div class="row">
-<div class="container">
-  <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-<div class="col s12 m10 l6" *ngIf="logado">
-    <input type="text" [(ngModel)]="article.title">
-    <input type="text" [(ngModel)]="article.dono" disabled="true">
-    <input type="text" [(ngModel)]="article.artigo">
-    <button class="btn-floating btn-large waves-effect waves-green green right" (click)="publicar()"><i mz-icon-mdi
+  <div class="container">
+    <div class="col s12 m1 l3 push-l3"><br/><br/></div>
+    <div class="col s12 m10 l6" *ngIf="logado">
+      <form #formArt="ngForm">
+      <div class="row">
+        <div class="input-field" [ngClass]="{'red-text': !titulo.valid && titulo.touched}">
+          <label for="title" [ngClass]="{'red-text': !titulo.valid && titulo.touched}">Titulo</label>
+          <input type="text" name="title" id="title" #titulo="ngModel" [(ngModel)]="article.title" class="validate" required/>
+          <div *ngIf="!titulo.valid && titulo.touched">Por favor, digite o título!</div>
+        </div>
+
+          <input type="text" name="dono" [(ngModel)]="article.dono" disabled="true" />
+          <label >Dono</label>
+        <div class="input-field" [ngClass]="{'red-text': !art.valid && art.touched}">
+          <input type="text" #art="ngModel" name="artigo" [(ngModel)]="article.artigo" class="input-field validate" required/>
+          <label for="artigo" [ngClass]="{'red-text': !art.valid && art.touched}">Artigo</label>
+          <div *ngIf="!art.valid && art.touched">Por favor, digite o artigo!</div>
+        </div>
+
+
+        <button class="btn-floating btn-large waves-effect waves-green green right" [disabled]="!formArt.valid" (click)="publicar()"><i mz-icon-mdi
   [icon]="'comment-text-outline'" class="black-text"
   [size]="'36px'">
 </i></button>
-</div>
-</div>
+  </div>
+</form>
+    </div>
+  </div>
 </div>
