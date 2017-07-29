@@ -8,7 +8,7 @@
       <input type="text" id='login' [(ngModel)]="login">
       <label for='login'>Login</label>
       <input type="password" id='pass' [(ngModel)]="password">
-      <label for='pass'>Senha</label>  
+      <label for='pass'>Senha</label>
       <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
       <a routerLink="/register">Registre</a>
     </div>
@@ -43,7 +43,7 @@
     <div class="col s12 m1 l2 offset -l2"><br/><br/></div>
     <div class="col s12 m10 l8" *ngIf="logado">
       <div class="input-field center">
-        <input id="search" type="text" [(ngModel)]="pesquisa" (change)="pesquisando()">
+        <input id="search" type="text" [(ngModel)]="pesquisa" (keyup)="pesquisando()">
         <label >Pesquise</label>
       </div>
       <table class="responsive-table highlight">
