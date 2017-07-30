@@ -19,7 +19,9 @@ export class ArticleComponent implements OnInit {
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private params: ActivatedRoute) {
     this.id = params.snapshot.params['id'];
   }
+r
   ngOnInit() {
+   if(this.auth.canActivate()!=false){
     this.auth.canActivate().then((sessao) => {
       this.logado = sessao;
       if (this.logado == true) {
@@ -30,6 +32,9 @@ export class ArticleComponent implements OnInit {
 
       }
     });
+  }else{
+    this.logado = false;
+  }
   }
 
 

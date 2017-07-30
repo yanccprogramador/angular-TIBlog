@@ -19,15 +19,20 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router, private auth: AuthGuard, private authe: AuthenticationService, private userService: UserService, private toastService: MzToastService) { }
 
   ngOnInit() {
-    this.auth.canActivate().then((sessao) => {
-      this.logado = sessao;
-      if (this.logado == true) {
-        this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
-          this.usuario.nome = art.rows[0].nome;
-          this.currentUser = localStorage.getItem('currentUser');
-        });
-      }
-    });
+    if (this.auth.canActivate() != false) {
+      this.auth.canActivate().then((sessao) => {
+
+        this.logado = sessao;
+        if (this.logado == true) {
+          this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
+            this.usuario.nome = art.rows[0].nome;
+            this.currentUser = localStorage.getItem('currentUser');
+          });
+        }
+      });
+    } else {
+      this.logado = false;
+    }
   }
   logar(): any {
     this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);

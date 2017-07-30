@@ -18,12 +18,16 @@ export class ArticlesComponent implements OnInit {
   pesquisa="";
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService) { }
   ngOnInit() {
+    if(this.auth.canActivate()!=false){
     this.auth.canActivate().then((sessao) => {
       this.logado = sessao;
       if (this.logado == true) {
         this.articleService.getAll().then((art) => this.articles = art);
       }
     });
+  }else{
+    this.logado = false;
+  }
   }
   mostrando(){
     this.mostrar=!this.mostrar;

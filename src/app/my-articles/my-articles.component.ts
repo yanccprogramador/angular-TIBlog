@@ -20,14 +20,18 @@ export class MyArticlesComponent implements OnInit {
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
 
   ngOnInit() {
-    this.auth.canActivate().then((sessao) => {
-      this.logado = sessao;
-      if (this.logado == true) {
-        let user = localStorage.getItem('currentUser');
-        this.articleService.getMine(user).then((art) => this.articles = art);
+    if (this.auth.canActivate() != false) {
+      this.auth.canActivate().then((sessao) => {
+        this.logado = sessao;
+        if (this.logado == true) {
+          let user = localStorage.getItem('currentUser');
+          this.articleService.getMine(user).then((art) => this.articles = art);
 
-      }
-    });
+        }
+      });
+    } else {
+      this.logado = false;
+    }
   }
   logar(): any {
     this.authe.login(this.login, this.password);

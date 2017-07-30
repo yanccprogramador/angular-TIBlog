@@ -14,10 +14,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-  private login;
-  private existe:boolean=false;
-  private senha;
-  private nome;
+   login;
+  existe:boolean=false;
+   senha;
+   nome;
   registrar():any{
     this.userService.create({"login":this.login,"senha":sha1(this.senha),"nome":this.nome}).then((res)=>{
       if(res.success){

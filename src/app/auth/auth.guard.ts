@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private userService:UserService) { }
 
   canActivate() {
+      if (localStorage.getItem('currentUser')) {
   return this.userService.getById(localStorage.getItem('currentUser')).then((art)=>{
     if (localStorage.getItem('currentUser')) {
 
@@ -25,7 +26,11 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     });
+    }else{
+      return false;
     }
+    }
+
 
 
 }

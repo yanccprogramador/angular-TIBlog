@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "public": "dist"
+  },
+  "rules": {
+    ".read":true,
+    ".write": true
+  }
+}

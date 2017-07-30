@@ -20,13 +20,17 @@ export class PublishComponent implements OnInit {
   constructor(private articleService: ArticleService, private toastService: MzToastService, private auth: AuthGuard, private authe: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.auth.canActivate().then((sessao) => {
-      this.logado = sessao;
-      if (this.logado == true) {
-        let user = localStorage.getItem('currentUser');
-        this.article.dono = user;
-      }
-    });
+    if (this.auth.canActivate() != false) {
+      this.auth.canActivate().then((sessao) => {
+        this.logado = sessao;
+        if (this.logado == true) {
+          let user = localStorage.getItem('currentUser');
+          this.article.dono = user;
+        }
+      });
+    } else {
+      this.logado = false;
+    }
   }
   logar(): any {
     this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
