@@ -14,7 +14,7 @@ export class AuthenticationService {
   constructor(private http: Http,private toastService: MzToastService) { }
 
   login(username: string, password: string) {
-    return this.http.get('http://yc-ti-blog.herokuapp.com/usuario/'+username)
+    return this.http.get('https://yc-ti-blog.herokuapp.com/usuario/'+username)
       .toPromise().then((response: Response) => {
         let body=response.json();
         let user=body.rows[0];

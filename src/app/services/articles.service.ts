@@ -12,7 +12,7 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class ArticleService {
 
-  private _url:string = "http://yc-ti-blog.herokuapp.com/";
+  private _url:string = "https://yc-ti-blog.herokuapp.com/";
   get url(): string {
     return this._url;
   }

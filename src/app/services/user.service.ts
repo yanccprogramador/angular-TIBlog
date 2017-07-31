@@ -7,7 +7,7 @@ import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class UserService {
-  protected usersUrl: string= "http://yc-ti-blog.herokuapp.com/usuario/";
+  protected usersUrl: string= "https://yc-ti-blog.herokuapp.com/usuario/";
   get usersURL(): string {
     return this.usersURL;
   }
