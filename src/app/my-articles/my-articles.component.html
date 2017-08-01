@@ -2,12 +2,14 @@
   <div class="container">
     <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
     <div class="col s12 m10 l6">
+      <form>
       <img class="responsive-image" style="width: 100%; height: 40%;" src="assets/logo.png" />
       <input type="text" id='login' [(ngModel)]="login">
       <label for='login'>Login</label>
       <input type="password" id='pass' [(ngModel)]="password">
       <label for='pass'>Senha</label><br/>
-      <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+      <input type="submit" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+    </form>
       <a routerLink="/register">Registre</a>
     </div>
   </div>
@@ -42,7 +44,9 @@
 <div  class="col s12 m10 l6" *ngIf="logado">
     <table class="responsive-table">
         <thead><tr><td>Titulo Artigos</td></tr></thead>
-        <tbody><tr *ngFor="let article of articles"><td (show)="teste()">{{article.titulo}}</td><td><button type="button" class="btn waves-effect waves-green" mz-button (mouseover)="atualizar(article.id)" (click)="editModal.open()">Atualizar</button></td><td><button type="button" class="btn waves-effect waves-green" (click)="del(article.id)">Apagar</button></td></tr> </tbody>
+        <tbody><tr *ngFor="let article of articles"><td (show)="teste()">{{article.titulo}}</td>
+        <td><button type="button" class="btn waves-effect waves-green" mz-button (mouseover)="atualizar(article.id)" (click)="editModal.open()">Atualizar</button></td>
+        <td><button type="button" class="btn waves-effect waves-green" mz-button (mouseover)="select(article.id)" (click)="confirm.open()">Apagar</button></td></tr> </tbody>
     </table>
 </div>
 </div>
@@ -68,6 +72,20 @@
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [flat]="true" [disabled]="!formModal.valid"  (click)="update(artigo.id)" mz-modal-close>Atualizar</button>
+  </mz-modal-footer>
+
+</mz-modal>
+<mz-modal #confirm [fixedFooter]="true">
+
+  <mz-modal-header>
+    TI Blog
+  </mz-modal-header>
+  <mz-modal-content>
+    Tem certeza que deseja excluir este artigo?
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button class="btn waves-effect waves-green green right" mz-modal-close>Não</button>
+    <button mz-button class="btn waves-effect waves-green green left" (click)="del(id)" mz-modal-close>Sim</button>
   </mz-modal-footer>
 
 </mz-modal>

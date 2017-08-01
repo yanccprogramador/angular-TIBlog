@@ -16,6 +16,7 @@ export class MyArticlesComponent implements OnInit {
   logado: boolean = true;
   private login: string;
   private password: string;
+  id=0;
   editModal;
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
 
@@ -33,9 +34,15 @@ export class MyArticlesComponent implements OnInit {
       this.logado = false;
     }
   }
+  select(id){
+    this.id=id;
+  }
   logar(): any {
-    this.authe.login(this.login, this.password);
-    this.logado = true;
+    this.authe.login(this.login, this.password).then((log: boolean) => {
+      this.logado = log;
+      let user = localStorage.getItem('currentUser');
+      this.articleService.getMine(user).then((art) => this.articles = art);
+    });
   }
   atualizar(id: number) {
 

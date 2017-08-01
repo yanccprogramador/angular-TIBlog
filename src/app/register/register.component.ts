@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
   verifica(){
     this.userService.getById(this.login).then((art)=>{
-      if(art.linhas==0){
+      if(art.numLinhas==0){
         this.existe=false;
       }else{
         this.existe=true;

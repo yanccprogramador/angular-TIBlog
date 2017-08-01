@@ -40,7 +40,10 @@ export class ArticlesComponent implements OnInit {
     }
   }
   logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
+    this.authe.login(this.login, this.password).then((log: boolean) => {
+      this.logado = log
+      this.articleService.getAll().then((art) => this.articles = art);
+    });
   }
 
   abrir(id: number) {

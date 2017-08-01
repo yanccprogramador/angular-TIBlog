@@ -36,15 +36,16 @@ export class PublishComponent implements OnInit {
     this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
   }
   publicar() {
-    alert(this.article.title);
+    this.article.artigo=this.article.artigo.replace("[^\\p{ASCII}]","");
     this.articleService.create(this.article).then((res) => {
       if (res.success) {
         this.toastService.show('Publicado!', 4000, 'green');
+        this.router.navigate(['/my']);
       } else {
         this.toastService.show('Reveja seus dados e publique novam!', 4000, 'green');
       }
     });
-    this.router.navigate(['/my']);
+
 
   }
 }

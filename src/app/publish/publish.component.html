@@ -2,12 +2,14 @@
   <div class="container">
     <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
     <div class="col s12 m10 l6">
+      <form>
       <img class="responsive-image" style="width: 100%; height: 40%;" src="assets/logo.png" />
       <input type="text" id='login' [(ngModel)]="login">
       <label for='login'>Login</label>
       <input type="password" id='pass' [(ngModel)]="password">
       <label for='pass'>Senha</label><br/>
-      <input type="button" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+      <input type="submit" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
+    </form>
       <a routerLink="/register">Registre</a>
     </div>
   </div>
