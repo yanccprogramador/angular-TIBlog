@@ -35,7 +35,13 @@ export class LogoutComponent implements OnInit {
     }
   }
   logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
+    this.authe.login(this.login, this.password).then((log: boolean) => {this.logado = log
+        if (this.logado == true) {
+          this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
+            this.usuario.nome = art.rows[0].nome;
+            this.currentUser = localStorage.getItem('currentUser');
+          });                                                               
+                                                                       });
   }
   deslogar(): any {
     this.authe.logout();
