@@ -13,14 +13,13 @@ import { MzToastService } from "ng2-materialize/dist";
   styleUrls: ['./publish.component.css']
 })
 export class PublishComponent implements OnInit {
-  logado: boolean = true;
+  logado: boolean = false;
   article = new Article();
   private login: string = '';
   private password: string = '';
   constructor(private articleService: ArticleService, private toastService: MzToastService, private auth: AuthGuard, private authe: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    if (this.auth.canActivate() != false) {
       this.auth.canActivate().then((sessao) => {
         this.logado = sessao;
         if (this.logado == true) {
@@ -28,9 +27,7 @@ export class PublishComponent implements OnInit {
           this.article.dono = user;
         }
       });
-    } else {
-      this.logado = false;
-    }
+
   }
   logar(): any {
     this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);

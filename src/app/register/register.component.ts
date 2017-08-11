@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
    senha;
    nome;
   registrar():any{
-    this.userService.create({"login":this.login,"senha":sha1(this.senha),"nome":this.nome}).then((res)=>{
+    this.userService.create({"login":this.login,"senha":this.senha,"nome":this.nome}).then((res)=>{
       if(res.success){
         this.toastService.show('Criado!', 4000, 'green');
         this.router.navigate(['/'], { });

@@ -10,7 +10,7 @@
       <form #formRegister="ngForm">
         <div class="input-field" [ngClass]="{'red-text': !log.valid && log.touched}">
           <label for="login" [ngClass]="{'red-text': !log.valid && log.touched}">Login:</label>
-          <input type="text" name="login" class="validate" #log="ngModel" (keup)="verifica()" required [(ngModel)]="login">
+          <input type="text" name="login" class="validate" #log="ngModel"  (keyup)="verifica()" required [(ngModel)]="login">
           <div *ngIf="!log.valid && log.touched">Por favor insira um login</div>
           <div class="red-text" *ngIf="existe"> Este usuário já existe</div>
         </div>

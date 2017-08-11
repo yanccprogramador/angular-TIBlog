@@ -12,35 +12,23 @@ import { ActivatedRoute } from "@angular/router";
 export class ArticleComponent implements OnInit {
   article;
 
-  logado: boolean = true;
+  logado: boolean = false
   id: number;
   private login: string;
   private password: string;
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private params: ActivatedRoute) {
     this.id = params.snapshot.params['id'];
   }
-r
+
   ngOnInit() {
-   if(this.auth.canActivate()!=false){
     this.auth.canActivate().then((sessao) => {
       this.logado = sessao;
-      if (this.logado == true) {
-        this.articleService.getById(this.id).then((art) => {
-          this.article = art
+    });
+  this.articleService.getById(this.id).then((art) => {
+          this.article = art;
           this.article[0].artigo = this.article[0].artigo.replace("\n/g", "<br/>");
         });
-
-      }
-    });
-  }else{
-    this.logado = false;
-  }
-  }
-
-
-
-  logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
+  
   }
 
 

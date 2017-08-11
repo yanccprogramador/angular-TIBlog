@@ -13,7 +13,7 @@ export class MyArticlesComponent implements OnInit {
   articles;
   articleUnique;
   artigo = { titulo: "", dono: "", artigo: "", id: 0 };
-  logado: boolean = true;
+  logado: boolean = false;
   private login: string;
   private password: string;
   id=0;
@@ -21,7 +21,6 @@ export class MyArticlesComponent implements OnInit {
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
 
   ngOnInit() {
-    if (this.auth.canActivate() != false) {
       this.auth.canActivate().then((sessao) => {
         this.logado = sessao;
         if (this.logado == true) {
@@ -30,9 +29,6 @@ export class MyArticlesComponent implements OnInit {
 
         }
       });
-    } else {
-      this.logado = false;
-    }
   }
   select(id){
     this.id=id;

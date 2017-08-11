@@ -1,54 +1,52 @@
-<div class="row" *ngIf="!logado">
-  <div class="container">
-    <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
-    <div class="col s12 m10 l6">
-      <form>
-      <img class="responsive-image" style="width: 100%; height: 40%;" src="assets/logo.png" />
-      <input type="text" id='login' [(ngModel)]="login">
-      <label for='login'>Login</label>
-      <input type="password" id='pass' [(ngModel)]="password">
-      <label for='pass'>Senha</label><br/>
-      <input type="submit" value="Logue" class="btn waves-effect waves-green" (click)="logar()"><br/>
-    </form>
-      <a routerLink="/register">Registre</a>
-    </div>
-  </div>
-</div>
-<nav *ngIf="logado">
-  <div class="nav-wrapper green">
-    <a href="#" class="brand-logo"><img src="assets/logo.png" style="width: 60px; height: 60px;"></a>
-    <a href="#"  class="button-collapse hide-on-large-only green"  [id]="'btn-sidenav-demo'"><i mz-icon-mdi
+<nav *ngIf="!logado">
+    <div class="nav-wrapper green">
+        <a href="#" class="brand-logo center"><img src="assets/logo.png" style="width: 60px; height: 60px;"></a>
+        <a href="#" class="button-collapse hide-on-large-only green" [id]="'btn-sidenav-demo'"><i mz-icon-mdi
 [icon]="'format-align-justify'" class="black-text"
 [size]="'36px'">
 </i></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/">Todos Artigos</a></li>
-      <li><a routerLink="/publish">Publique</a></li>
-      <li><a routerLink="/my">Meus Artigos</a></li>
-      <li><a routerLink="/user">User</a></li>
-    </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a routerLink="/user">Logar</a></li>
+        </ul>
 
-  <mz-sidenav [id]="'sidenav-demo'"
-  [collapseButtonId]="'btn-sidenav-demo'" >
+        <mz-sidenav [id]="'sidenav-demo'" [collapseButtonId]="'btn-sidenav-demo'">
+            <mz-sidenav-link><a routerLink="/user">Logar</a></mz-sidenav-link>
+        </mz-sidenav>
+    </div>
+</nav>
+<nav *ngIf="logado">
+    <div class="nav-wrapper green">
+        <a href="#" class="brand-logo center"><img src="assets/logo.png" style="width: 60px; height: 60px;"></a>
+        <a href="#" class="button-collapse hide-on-large-only green" [id]="'btn-sidenav-demo'"><i mz-icon-mdi
+[icon]="'format-align-justify'" class="black-text"
+[size]="'36px'">
+</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a routerLink="/">Todos Artigos</a></li>
+            <li><a routerLink="/publish">Publique</a></li>
+            <li><a routerLink="/my">Meus Artigos</a></li>
+            <li><a routerLink="/user">User</a></li>
+        </ul>
 
-      <mz-sidenav-link><a routerLink="/">Todos Artigos</a></mz-sidenav-link>
-      <mz-sidenav-link><a routerLink="/publish">Publique</a></mz-sidenav-link>
-      <mz-sidenav-link><a routerLink="/my">Meus Artigos</a></mz-sidenav-link>
-      <mz-sidenav-link><a routerLink="/user">User</a></mz-sidenav-link>
-</mz-sidenav>
-  </div>
+        <mz-sidenav [id]="'sidenav-demo'" [collapseButtonId]="'btn-sidenav-demo'">
+
+            <mz-sidenav-link><a routerLink="/">Todos Artigos</a></mz-sidenav-link>
+            <mz-sidenav-link><a routerLink="/publish">Publique</a></mz-sidenav-link>
+            <mz-sidenav-link><a routerLink="/my">Meus Artigos</a></mz-sidenav-link>
+            <mz-sidenav-link><a routerLink="/user">User</a></mz-sidenav-link>
+        </mz-sidenav>
+    </div>
 </nav>
 <div class="row">
-<div class="container">
-    <div class="col s12 m1 l2 offset -l2"><br/><br/></div>
-    <div class="col s12 m10 l8" *ngIf="logado">
-        <h3>{{article[0].titulo }}</h3><br/>
-        by:{{article[0].dono }}
-         <br/>
-         <br/>
-         Artigo:<br/><br/>
-        <article [innerHTML]=" article[0].artigo" ></article>
+    <div class="container">
+        <div class="col s12 m1 l2 offset -l2"><br/><br/></div>
+        <div class="col s12 m10 l8">
+            <h3>{{article[0].titulo }}</h3><br/> by:{{article[0].dono }}
+            <br/>
+            <br/> Artigo:
+            <br/><br/>
+            <article [innerHTML]=" article[0].artigo"></article>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>

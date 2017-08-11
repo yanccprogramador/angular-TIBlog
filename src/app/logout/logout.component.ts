@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AuthGuard} from '../auth/auth.guard';
 import {AuthenticationService} from "../auth/auth.service";
 import { UserService } from "app/services/user.service";
-import * as sha1 from 'js-sha1';
 import {MzToastService} from "ng2-materialize/dist";
 import { Router } from "@angular/router";
 @Component({
@@ -12,14 +11,14 @@ import { Router } from "@angular/router";
 })
 export class LogoutComponent implements OnInit {
   usuario = { nome: "", senha: "" };
-  logado: boolean = true;
-  currentUser
+  logado: boolean = false;
+  currentUser;
   private login: string = '';
   private password: string = '';
   constructor(private router: Router, private auth: AuthGuard, private authe: AuthenticationService, private userService: UserService, private toastService: MzToastService) { }
 
   ngOnInit() {
-    if (this.auth.canActivate() != false) {
+
       this.auth.canActivate().then((sessao) => {
 
         this.logado = sessao;
@@ -27,12 +26,10 @@ export class LogoutComponent implements OnInit {
           this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
             this.usuario.nome = art.rows[0].nome;
             this.currentUser = localStorage.getItem('currentUser');
+            this.usuario.senha=localStorage.getItem('userSenha');
           });
         }
       });
-    } else {
-      this.logado = false;
-    }
   }
   logar(): any {
     this.authe.login(this.login, this.password).then((log: boolean) => {this.logado = log
@@ -40,15 +37,16 @@ export class LogoutComponent implements OnInit {
           this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
             this.usuario.nome = art.rows[0].nome;
             this.currentUser = localStorage.getItem('currentUser');
-          });                                                               
-                                                                       });
+            this.usuario.senha=localStorage.getItem('userSenha');
+          });
+      }
+    });
   }
   deslogar(): any {
     this.authe.logout();
-    this.logado = this.auth.canActivate();
+    this.router.navigate(['/logout']);
   }
   update() {
-    this.usuario.senha = sha1(this.usuario.senha);
     this.userService.update(this.usuario, localStorage.getItem('currentUser')).then((art) => {
       if (art.success) {
         this.toastService.show('Atualizado!', 4000, 'green');
