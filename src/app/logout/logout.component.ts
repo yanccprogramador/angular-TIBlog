@@ -50,7 +50,7 @@ export class LogoutComponent implements OnInit {
     this.userService.update(this.usuario, localStorage.getItem('currentUser')).then((art) => {
       if (art.success) {
         this.toastService.show('Atualizado!', 4000, 'green');
-        this.router.navigate(['/user']);
+        this.router.navigate(['/']);
       } else {
         this.toastService.show('Tente novamente!', 4000, 'red');
       }

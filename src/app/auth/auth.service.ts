@@ -15,7 +15,7 @@ export class AuthenticationService {
   login(username: string, password: string) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post('https://yc-ti-blog.herokuapp.com/usuario/logar',{login:username,senha:password},options)
+    return this.http.post('https://yc-ti-blog.herokuapp.com/usuario/logar',{"login":""+username,"senha":""+password},options)
       .toPromise().then((response: Response) => {
         let body=response.json();
         let user=body;
