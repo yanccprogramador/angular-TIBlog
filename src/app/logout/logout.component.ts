@@ -28,23 +28,14 @@ export class LogoutComponent implements OnInit {
             this.currentUser = localStorage.getItem('currentUser');
             this.usuario.senha=localStorage.getItem('userSenha');
           });
+        }else{
+          this.router.navigate(['/login']);
         }
       });
   }
-  logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => {this.logado = log
-        if (this.logado == true) {
-          this.userService.getById(localStorage.getItem('currentUser')).then((art) => {
-            this.usuario.nome = art.rows[0].nome;
-            this.currentUser = localStorage.getItem('currentUser');
-            this.usuario.senha=localStorage.getItem('userSenha');
-          });
-      }
-    });
-  }
   deslogar(): any {
     this.authe.logout();
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/']);
   }
   update() {
     this.userService.update(this.usuario, localStorage.getItem('currentUser')).then((art) => {

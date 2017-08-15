@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { MaterializeModule } from 'ng2-materialize';
 import { ArticleComponent } from './article/article.component';
 import { MzModalService } from 'ng2-materialize';
+import { LoginComponent } from './login/login.component';
 
 
 const routes:Routes = [
@@ -24,6 +25,7 @@ const routes:Routes = [
   {path:'my', component:MyArticlesComponent},
   {path:'user', component:LogoutComponent},
   {path:'register', component:RegisterComponent},
+  {path:'login', component:LoginComponent},
   {path:':id', component:ArticleComponent }
 
 ];
@@ -35,7 +37,8 @@ const routes:Routes = [
     MyArticlesComponent,
     LogoutComponent,
     RegisterComponent,
-    ArticleComponent
+    ArticleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

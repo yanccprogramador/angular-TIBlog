@@ -1,0 +1,18 @@
+<div class="row" *ngIf="!logado">
+    <div class="container">
+        <div class="col s12 m1 l3 offset -l3"><br/><br/></div>
+        <div class="col s12 m10 l6">
+            <img class="responsive-image" style="width: 100%; height: 40%;" src="assets/logo.png" />
+            <div class="input-field">
+                <input type="text" id='login' [(ngModel)]="login">
+                <label for='login'>Login</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id='pass' [(ngModel)]="password">
+                <label for='pass'>Senha</label><br/>
+                <input type="submit" value="Logue" class="btn waves-effect waves-green" (click)="logar()" [disabled]="enviando"><br/>
+            </div>
+            <a routerLink="/register">Registre</a>
+        </div>
+    </div>
+</div>

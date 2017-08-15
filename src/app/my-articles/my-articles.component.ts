@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {Article} from '../articles';
 import {AuthGuard} from '../auth/auth.guard';
@@ -18,7 +19,8 @@ export class MyArticlesComponent implements OnInit {
   private password: string;
   id=0;
   editModal;
-  constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
+  constructor(private articleService: ArticleService, private router:Router,
+    private auth: AuthGuard, private authe: AuthenticationService, private toastService: MzToastService) { }
 
   ngOnInit() {
       this.auth.canActivate().then((sessao) => {
@@ -27,19 +29,15 @@ export class MyArticlesComponent implements OnInit {
           let user = localStorage.getItem('currentUser');
           this.articleService.getMine(user).then((art) => this.articles = art);
 
+        }else{
+          this.router.navigate(['/login']);
         }
       });
   }
   select(id){
     this.id=id;
   }
-  logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => {
-      this.logado = log;
-      let user = localStorage.getItem('currentUser');
-      this.articleService.getMine(user).then((art) => this.articles = art);
-    });
-  }
+
   atualizar(id: number) {
 
     this.articleService.getById(id).then((art) => this.artigo = art[0]);

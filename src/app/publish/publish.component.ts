@@ -14,6 +14,7 @@ import { MzToastService } from "ng2-materialize/dist";
 })
 export class PublishComponent implements OnInit {
   logado: boolean = false;
+  enviando=false;
   article = new Article();
   private login: string = '';
   private password: string = '';
@@ -25,14 +26,14 @@ export class PublishComponent implements OnInit {
         if (this.logado == true) {
           let user = localStorage.getItem('currentUser');
           this.article.dono = user;
+        }else{
+          this.router.navigate(['/login']);
         }
       });
 
   }
-  logar(): any {
-    this.authe.login(this.login, this.password).then((log: boolean) => this.logado = log);
-  }
   publicar() {
+   if(!this.enviando){
     this.article.artigo=this.article.artigo.replace("[^\\p{ASCII}]","");
     this.articleService.create(this.article).then((res) => {
       if (res.success) {
@@ -43,6 +44,6 @@ export class PublishComponent implements OnInit {
       }
     });
 
-
+   }
   }
 }

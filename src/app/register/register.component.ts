@@ -15,16 +15,19 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
    login;
+   enviando=false;
   existe:boolean=false;
    senha;
    nome;
   registrar():any{
+    if(!this.enviando){
     this.userService.create({"login":this.login,"senha":this.senha,"nome":this.nome}).then((res)=>{
       if(res.success){
         this.toastService.show('Criado!', 4000, 'green');
         this.router.navigate(['/'], { });
       }
     });
+    }
   }
   verifica(){
     this.userService.getById(this.login).then((art)=>{
