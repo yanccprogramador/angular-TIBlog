@@ -21,6 +21,7 @@ export class PublishComponent implements OnInit {
   constructor(private articleService: ArticleService, private toastService: MzToastService, private auth: AuthGuard, private authe: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+     if(localStorage.getItem('currentUser')!=null && localStorage.getItem('userSenha')!=null && localStorage.getItem('currentUser')!=undefined && localStorage.getItem('userSenha')!=undefined){
       this.auth.canActivate().then((sessao) => {
         this.logado = sessao;
         if (this.logado == true) {
@@ -30,7 +31,9 @@ export class PublishComponent implements OnInit {
           this.router.navigate(['/login']);
         }
       });
-
+     }else{
+      this.router.navigate(['/login']);
+    } 
   }
   publicar() {
    if(!this.enviando){

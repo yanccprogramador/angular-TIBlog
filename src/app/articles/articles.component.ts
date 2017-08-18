@@ -18,9 +18,11 @@ export class ArticlesComponent implements OnInit {
   pesquisa="";
   constructor(private articleService: ArticleService, private auth: AuthGuard, private authe: AuthenticationService) { }
   ngOnInit() {
+    if(localStorage.getItem('currentUser')!=null && localStorage.getItem('userSenha')!=null && localStorage.getItem('currentUser')!=undefined && localStorage.getItem('userSenha')!=undefined){
     this.auth.canActivate().then((sessao) => {
       this.logado = sessao;
     });
+    }
     this.articleService.getAll().then((art) => this.articles = art);
   }
   mostrando(){

@@ -21,9 +21,11 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('currentUser')!=null && localStorage.getItem('userSenha')!=null && localStorage.getItem('currentUser')!=undefined && localStorage.getItem('userSenha')!=undefined){
     this.auth.canActivate().then((sessao) => {
       this.logado = sessao;
     });
+    }
   this.articleService.getById(this.id).then((art) => {
           this.article = art;
           this.article[0].artigo = this.article[0].artigo.replace("\n/g", "<br/>");
