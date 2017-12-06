@@ -6,7 +6,7 @@ import {ArticleService} from "./services/articles.service";
 import {UserService} from "./services/user.service";
 import { AppComponent } from './app.component';
 import {RouterModule,Routes} from '@angular/router'
-import { FormsModule }  from '@angular/forms'
+import { FormsModule }  from '@angular/forms';
 import{Http,HttpModule} from '@angular/http';
 import { ArticlesComponent } from './articles/articles.component';
 import { PublishComponent } from './publish/publish.component';
@@ -45,7 +45,7 @@ const routes:Routes = [
     HttpModule,
 	  FormsModule,
     MaterializeModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [ArticleService, UserService, AuthGuard, AuthenticationService,MzModalService],
   bootstrap: [AppComponent]
