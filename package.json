@@ -23,7 +23,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "enhanced-resolve": "^3.3.0",
-    "jquery": "^2.2.4",
+    "jquery": "~3.0.0",
     "js-sha1": "^0.4.1",
     "materialize-css": "^0.99.0",
     "mdi": "^1.9.33",
